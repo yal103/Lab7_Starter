@@ -128,6 +128,26 @@ describe('Basic user flow for Website', () => {
      * Also check to make sure that #cart-count is still 20
      * Remember to remove the .skip from this it once you are finished writing this test.
      */
+    await page.reload();
+    const productItems = await page.$$('product-item');
+    
+    let allButtonsCorrect = true;
+
+    for (const item of productItems) {
+        const shadowRoot = await item.getProperty('shadowRoot');
+        const button = await shadowRoot.$('button');
+        const textHandle = await button.getProperty('innerText');
+        const buttonText = await textHandle.jsonValue();
+
+        if (buttonText != 'Remove from Cart') {
+            allButtonsCorrect = false;
+            break;
+        }
+    }
+
+    expect(allButtonsCorrect).toBe(true);
+    const cartCount = await page.$eval('#cart-count', count => count.innerText);
+    expect(cartCount).toBe('20');
 
   }, 10000);
 
