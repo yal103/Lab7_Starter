@@ -9,3 +9,7 @@
     c. Run them all after all development is completed
 
     > I would fit my automated tests in the Recipe project development pipeline **within a Github action that runs whenever code is pushed**. This is because it ensures that every push that is made to a repository does not break the code. After each change, it ensures that the interactions with the localStorage, rendering, and component integration work as expected. For example, any change to `RecipeCard.js` or `main.js` could break the code (ex. rendering, event listeners, form behavior). Manually running tests locally before pushing code is less ideal because it is not enforced, it is inconsistent, and easy to forget. Running the tests after all development is complete is also not ideal before it will be very hard to find the bugs and issues in the code.
+
+2) Would you use an end to end test to check if a function is returning the correct output? (yes/no)
+
+    > **No**, unit tests are more ideal.
